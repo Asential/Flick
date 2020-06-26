@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html style="height:100%">
+<head>
+    <meta charset="UTF-8">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="{{url_for('static',filename='index.js')}}"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles.css')}}">
+    <title>Flack</title>
+</head>
+<body style="height:100%" class='container'>
+    <nav  class=' justify-content-center'>
+        <h1>FLACK</h1>
+    </nav>
+    <div  class='row h-75  border border-secondary' >
+        <div   class='col-12 bg-light border p-3 d-flex flex-column justify-content-end h-100' >
+            <div id='messages'>
+                <ul>
+                {% for item in channel["general"] %}
+                    <li> 
+                        {{ item }}
+                    </li>
+                {% endfor %}
+                </ul>
+                </div>
+            <input id='myMessage' type='text' class="form-control text-left" minlength="1" maxlength="80">
+            <button id="sendbutton">Send</button>
+        </div>
+    </div>
+    <input id="modalInput" type='text'>
+    <button id='modalButton' type="button" class="btn btn-danger" data-dismiss="modal">Ok</button>
+    
+</body>
+</html>
