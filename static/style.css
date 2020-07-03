@@ -1,0 +1,272 @@
+@import url(https://fonts.googleapis.com/css?family=Oswald);
+
+/* width */
+#messages::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* button */
+#messages::-webkit-scrollbar-button {
+    background: cyan; 
+}
+
+/* Handle */
+#messages::-webkit-scrollbar-thumb {
+    background: cyan; 
+}
+
+/* Handle on hover */
+#messages::-webkit-scrollbar-thumb:hover {
+    background: cyan; 
+}
+
+/* Track */
+#messages::-webkit-scrollbar-track {
+    background: rgb(255, 255, 255); 
+}
+
+/* The track NOT covered by the handle.
+::-webkit-scrollbar-track-piece {
+    background: #000; 
+}
+
+/* Corner */
+#messages::-webkit-scrollbar-corner {
+    background: rgb(255, 0, 0)252, 0, 0); 
+}
+
+/* Resizer */
+#messages::-webkit-resizer {
+    background: #111; 
+}
+
+
+
+/* width */
+#channels::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* button */
+#channels::-webkit-scrollbar-button {
+    background: rgb(0, 0, 0); 
+}
+
+/* Handle */
+#channels::-webkit-scrollbar-thumb {
+    background: rgb(0, 0, 0)
+}
+
+/* Handle on hover */
+#channels::-webkit-scrollbar-thumb:hover {
+    background: rgb(0, 0, 0); 
+}
+
+/* Track */
+#channels::-webkit-scrollbar-track {
+    background: deepskyblue; 
+}
+
+/* The track NOT covered by the handle.
+::-webkit-scrollbar-track-piece {
+    background: #000; 
+}
+
+/* Corner */
+#channels::-webkit-scrollbar-corner {
+    background: rgb(255, 0, 0)252, 0, 0); 
+}
+
+/* Resizer */
+#channels::-webkit-resizer {
+    background: #111; 
+}
+
+
+
+html, body {
+    overflow: hidden;
+  }
+
+.lnk{
+    text-decoration:none;
+    width: 95%;
+}
+.mrgn{
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+
+body{
+    font-family: 'Oswald';
+}
+
+.scroll{
+    overflow-y:scroll; 
+    height: 100%;
+}
+
+.usermsg{
+    float: right; 
+    width: 100%;
+    word-wrap: break-word;
+    
+}
+
+.sendermsg{
+    float: left; 
+    width: 100%;
+    word-wrap: break-word;
+}
+
+.chatspace{
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+html {
+    scroll-behavior: smooth;
+  }
+
+.timestampRecieved{
+    text-align: right;
+    font-size: smaller;
+}
+
+.timestampSent{
+    text-align: left;
+    font-size: smaller;
+}
+
+.inputfield{
+    margin-top: 5px;
+}
+
+.buttonstyle{
+    margin-top: 5px; 
+    text-align: center; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}
+
+.gg-add-r {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    width: 22px;
+    height: 22px;
+    border: 2px solid;
+    transform: scale(var(--ggs,1));
+    border-radius: 4px;
+ }
+ .gg-add-r::after,
+ .gg-add-r::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 10px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 5px;
+    top: 8px;
+    left: 4px;
+ }
+ .gg-add-r::after {
+    width: 2px;
+    height: 10px;
+    top: 4px;
+    left: 8px;
+ }
+.channelhover:hover > .gg-add-r{
+    color: deepskyblue;
+}
+
+body {
+    padding: 2rem;
+    background: #fce8d5;
+}
+.sketchy {
+    
+    border: 3px solid #333;
+
+    background: #fff;
+    position: relative;
+}
+.sketchy::before {
+    content: '';
+    border: 2px solid #353535;
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    
+    
+}
+
+#logoutbutton{
+    float: right;
+}
+
+#logoutform{
+    float: right;
+    -ms-flex: 0 0 50%;
+  flex: 0 0 50%;
+  max-width: 50%;
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+#user{
+    font-size: x-large;
+    color: aliceblue;
+}
+user{
+    border-bottom: 4px dotted;
+}
+
+#recieved{
+    color: tomato;
+    padding: 0rem .5rem;
+    border: 1px solid;
+    border-width: unset;
+}
+
+#sent{
+    color: deepskyblue;
+    padding: 0rem .5rem;
+    border: 1px solid;
+    border-width: unset;
+}
+
+.btn{
+    padding: .375rem .375rem;
+}
+
+.activechannel{
+    background-color: tomato; 
+    color: blanchedalmond;
+}
+
+@media (max-width: 600px) {
+    .timestampRecieved .timestampSent {
+        display: none;
+    }
+    #user{
+        display: none;
+    }
+    #logoutbutton{
+        float: none;
+    }
+    #logoutform{
+        margin-left: 2%;
+        max-width: 100%;
+    }
+}
+
+

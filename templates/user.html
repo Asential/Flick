@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<head>
+    <script src="{{url_for('static',filename='style.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='login.css')}}">
+    <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+</head>
+<body>
+    <div class="login" style="background: tomato;">
+        <header class="header">
+          <span class="text" style="color: black;">
+                <div class="col-12" style="height: 25%; padding: 0%;">Flick</div>
+                <div class="col-12 hide" style="height: 25%; font-size: medium;">Start Chatting</div>
+          </span>
+          <span class="loader"></span>
+        </header>
+        <form class="form" action="{{url_for('login')}}" method="POST"> 
+              <input name="username" class="input blueplaceholder" type="text", placeholder="Username" maxlength="11" style="background: tomato;">
+            <button class="btn" type="submit"style="background-color: tomato;"></button>
+        </form>
+      </div>
+      
+</body>

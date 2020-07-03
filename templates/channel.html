@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html style="height:100%">
+<head>
+    <meta charset="UTF-8">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="{{url_for('static',filename='index.js')}}"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='chat.css')}}">
+    <link href='https://css.gg/add-r.css' rel='stylesheet'>
+    <link href='https://css.gg/chevron-right-r.css' rel='stylesheet'>
+    <link href='https://css.gg/chevron-double-down-r.css' rel='stylesheet'>
+    <title>Flack</title>
+    <!-- <script>
+
+        function offset(el) {
+			var rect = el.getBoundingClientRect(),
+			scrollLeft = window.pageXOffset || document.documentElement.scrollLeft,
+			scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+			return { top: rect.top + scrollTop, left: rect.left + scrollLeft }
+        }
+        function scrollChannel(){
+            const container = document.querySelector('.active')
+			console.log(container.scrollTop)
+			$('#channels').scrollTop(container.scrollTop);
+        }
+        
+        window.onload = scrollChannel;
+
+    </script> -->
+</head>
+<div id="currentChannelID" style="display: none;">{{currentChannelID}}</div>
+<body style="height:100%" class='container'>
+
+    
+    <nav  class=' justify-content-center'>
+        <h1>Flick</h1>
+    </nav>
+    <div  class='row h-75  sketchy border-secondary' >
+        <div class='col-3 border p-3 d-flex flex-column justify-content-end h-100 ' style="background-color: deepskyblue;" >
+            <div class="row" style="height: 25%;">
+                <div id="user" class="col-6" style=" margin-top: 5px;"><user>{{username}}</user></div>
+                <form id="logoutform" action="{{url_for('logout')}}"  method="POST">
+                    <button id="logoutbutton" class="btn buttonstyle" style="float: right;" >Logout</button>
+                </form>
+            </div>
+                <p style="border-bottom: 2px solid black;">Join a channel or create one!</p>
+                    <ul class="list-group scroll" id='channels'>
+                        {% for item in channelsList %}
+
+                        {% if item.channelid == currentChannelID %}
+                            <a href="/channels/{{item.channelid}}" class="hvr-bubble-float-right lnk active" style="transform: none;">
+                                <li class="list-group-item chatspace mrgn activechannel" > 
+                                    {{ item.name }}
+                                </li>
+                            </a>
+                        {% else %}
+                            <a href="/channels/{{item.channelid}}" class="hvr-bubble-float-right lnk">
+                                <li class="list-group-item chatspace mrgn" style="color: black"> 
+                                    {{ item.name }}
+                                </li>
+                            </a>
+                        {% endif %}
+                        
+                        {% endfor %} 
+                    </ul>
+            <form>
+                <input id='myChannel' type='text' class="form-control text-left inputfield" minlength="1" maxlength="30">
+                <div class="row">
+                    <div class="col-4"></div>
+                <button id="channelButton" class="btn col-4 buttonstyle channelhover" type="submit"><i class="gg-add-r"></i></button>
+                <div class="col-4"></div>
+                </div>
+            </form>
+    </div>
+        <div id="cont" class='col-9 bg-light border p-3 d-flex flex-column justify-content-end h-100 ' >
+            <ul id='messages' class="list-group scroll">   
+                {% for item in channelsList %}
+                    {% if item.channelid == currentChannelID %}
+                        {% for message in item.messages %}
+                            {% if message.user == username%}
+                                <div class="container chatspace">
+                                    <div class="row">
+                                        <div class="col-7" style="width: 66.66%;">
+                                        </div>
+                                        <li class="list-group-item col-5 usermsg" style="width: 33.33%;" >
+                                            <span id="sent" style="float: right;" >{{message.user}}</span><br>
+                                            <span style="float: left; padding-left: 15px; line-height: 2;">{{message.content}}</span><br><br>
+                                            <div class="col-12 timestampSent smallscreenhide" > {{message.time}}</div>
+                                            <div style="float: right;"><button class="delete" style="padding: 5px; background: red"><p style="display: none;">{{message.user}}{{message.content}}{{message.time}}</p></button></div>
+                                        </li>   
+                                    </div>
+                                </div>
+
+                            {% else %}
+                                <div class="container chatspace">
+                                    <div class="row">
+                                        <li class="list-group-item col-5 sendermsg" style="width: 33.33%;">
+                                            <span id="recieved">{{message.user}}</span><br>
+                                            <span style="line-height: 2;">{{ message.content }}</span><br><br>
+                                            <div class="col-12 timestampRecieved smallscreenhide">{{ message.time }}</div>
+                                        </li>
+                                        <div class="col-7" style="width: 66.66%;">
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}                    
+                {% endfor %}
+                
+                </ul>
+            <form>
+                
+                <input id='myMessage' type='text' class="form-control text-left inputfield" minlength="1" maxlength="150"> 
+                <scroll id="scrolltobottomButton" class="btn buttonstyle" href="#" style="float: left; padding: .375rem 0rem;"><i class="gg-chevron-double-down-r" style="color: cyan;"></i></scroll>  
+                <button id="messageButton" class="btn buttonstyle" style="float: right; padding: .375rem 0rem;" type="submit"><i class="gg-chevron-right-r" style="color: cyan;"></i></button>
+
+            </form>
+        </div>
+        
+    </div>
+</body>
+</html>
